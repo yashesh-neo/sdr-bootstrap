@@ -6,6 +6,8 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "SDR_IDENTITIES")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="Identity_Type")
 @Getter
 @Setter
 public class SdrIdentityModel {
