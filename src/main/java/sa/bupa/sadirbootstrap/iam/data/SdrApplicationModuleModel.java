@@ -7,7 +7,7 @@ import lombok.Setter;
 import java.util.Set;
 
 @Entity
-@Table(name = "SDR_APPLICATOIN_MODULES")
+@Table(name = "SDR_APPLICATION_MODULES")
 @Getter
 @Setter
 public class SdrApplicationModuleModel {
