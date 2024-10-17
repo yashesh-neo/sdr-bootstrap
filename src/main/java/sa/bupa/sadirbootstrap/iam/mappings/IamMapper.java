@@ -5,11 +5,15 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
+import sa.bupa.sadirbootstrap.iam.data.AuthorizedPersonModel;
+import sa.bupa.sadirbootstrap.iam.data.CustomerModel;
 import sa.bupa.sadirbootstrap.iam.data.SdrApplicationModuleModel;
 import sa.bupa.sadirbootstrap.iam.data.SdrAuthoritiesModel;
 import sa.bupa.sadirbootstrap.iam.data.enumrations.SdrModulePermissions;
 import sa.bupa.sadirbootstrap.iam.domain.SdrApplicationModule;
 import sa.bupa.sadirbootstrap.iam.domain.SdrAuthority;
+import sa.bupa.sadirbootstrap.iam.domain.identities.impl.AuthorizedPerson;
+import sa.bupa.sadirbootstrap.iam.domain.identities.impl.Customer;
 
 import java.util.Map;
 import java.util.Set;
@@ -64,4 +68,12 @@ public interface IamMapper {
     SdrApplicationModule sdrApplicationModuleModelToSdrApplicationModule(SdrApplicationModuleModel sdrApplicationModuleModel);
 
     Set<SdrApplicationModule> sdrApplicationModuleModelSetToSdrApplicationModuleSet(Set<SdrApplicationModuleModel> sdrApplicationModuleModelSet);
+
+    SdrApplicationModuleModel sdrApplicationModuleToSdrApplicationModuleModel(SdrApplicationModule sdrApplicationModule);
+
+    Set<SdrApplicationModuleModel> sdrApplicationModuleSetToSdrApplicationModuleModelSet(Set<SdrApplicationModule> sdrApplicationModuleSet);
+
+    AuthorizedPerson authorizedPersonModelToAuthorizedPerson(AuthorizedPersonModel authorizedPersonModel);
+
+    Customer customerModelToCustomer(CustomerModel customerModel);
 }
