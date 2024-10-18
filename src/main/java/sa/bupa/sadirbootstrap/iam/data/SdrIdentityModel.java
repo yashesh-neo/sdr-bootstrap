@@ -13,9 +13,9 @@ import lombok.Setter;
 public class SdrIdentityModel {
     @Id
     @GeneratedValue
-    private Long id;
+    Long id;
     @Column(unique = true, nullable = false)
-    private String principal;
+    String principal;
     @ManyToOne(optional = false)
-    private SdrRoleModel assignedRole;
+    SdrRoleModel assignedRole;
 }

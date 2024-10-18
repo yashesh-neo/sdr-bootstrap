@@ -5,6 +5,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
+import org.springframework.stereotype.Component;
 import sa.bupa.sadirbootstrap.iam.data.AuthorizedPersonModel;
 import sa.bupa.sadirbootstrap.iam.data.CustomerModel;
 import sa.bupa.sadirbootstrap.iam.data.SdrApplicationModuleModel;
@@ -18,9 +19,9 @@ import sa.bupa.sadirbootstrap.iam.domain.identities.impl.Customer;
 import java.util.Map;
 import java.util.Set;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface IamMapper {
 
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "default")
+public interface IamMapper {
     IamMapper INSTANCE = Mappers.getMapper(IamMapper.class);
 
     Map<SdrModulePermissions,String> permissionToCharMap = Map.of(SdrModulePermissions.CREATE,"c",
