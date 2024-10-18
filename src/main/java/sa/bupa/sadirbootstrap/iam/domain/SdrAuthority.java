@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class SdrAuthority {
     private long moduleId;
-    private String accessPattern;
+    private String accessPattern; // "crud"
 }
