@@ -1,4 +1,4 @@
-package sa.bupa.sadirbootstrap.leads.data;
+package sa.bupa.sadirbootstrap.profiles.data;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -37,4 +37,7 @@ public class SdrPolicyAgreementProfileModel {
 
     @Convert(converter = NumericBooleanConverter.class)
     private Boolean isAgreementTermsAcceptance;
+
+    @Convert(converter = NumericBooleanConverter.class)
+    private Boolean isAbsherAuthenticated;
 }
