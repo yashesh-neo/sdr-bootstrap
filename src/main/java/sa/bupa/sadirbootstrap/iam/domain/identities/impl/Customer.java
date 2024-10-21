@@ -1,15 +1,12 @@
 package sa.bupa.sadirbootstrap.iam.domain.identities.impl;
 
 import lombok.Data;
-import org.mapstruct.factory.Mappers;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import sa.bupa.sadirbootstrap.iam.domain.SdrIdentity;
-import sa.bupa.sadirbootstrap.iam.mappings.IamMapper;
-
 import java.util.Collection;
-import java.util.List;
+
 
 @Data
 public class Customer extends SdrIdentity implements UserDetails {
@@ -21,10 +18,8 @@ public class Customer extends SdrIdentity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return getRole().getAuthorities().stream().map(am ->{
-            var authority= new SimpleGrantedAuthority(getRole().getAuthorities().stream().findFirst().get().getAccessPattern());
-            return authority;
-        }).toList();
+        return getRole().getAuthorities().stream()
+                .map(am -> new SimpleGrantedAuthority(getRole().getAuthorities().stream().findFirst().get().getAccessPattern())).toList();
     }
 
     @Override
