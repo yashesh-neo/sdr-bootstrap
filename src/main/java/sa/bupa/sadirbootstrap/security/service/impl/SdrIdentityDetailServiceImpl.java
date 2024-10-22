@@ -17,6 +17,7 @@ public class SdrIdentityDetailServiceImpl implements SdrUserDetailService {
     IamMapper iamMapper = Mappers.getMapper(IamMapper.class);
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        //TODO: implement in memory cache layer to store loaded identities until they are modified
         return customerModelRepository.findByPrincipal(username)
                 .map(customerModel -> iamMapper.customerModelToCustomer(customerModel))
                 .orElse(null);
