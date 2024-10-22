@@ -17,12 +17,15 @@ public class Customer extends SdrIdentity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return getRole().getAuthorities()
-                .stream()
-                .map(am -> new SimpleGrantedAuthority(String.valueOf(am.getModuleId())
-                        .concat(SEPARATOR_MODULE_PERMISSION)
-                            .concat(am.getAccessPattern())))
-                .toList();
+        if(getRole()!=null)
+            return getRole().getAuthorities()
+                    .stream()
+                    .map(am -> new SimpleGrantedAuthority(String.valueOf(am.getModuleId())
+                            .concat(SEPARATOR_MODULE_PERMISSION)
+                                .concat(am.getAccessPattern())))
+                    .toList();
+        else
+            return null;
     }
 
     @Override

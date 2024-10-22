@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import sa.bupa.sadirbootstrap.iam.api.dto.AuthenticationRequest;
 import sa.bupa.sadirbootstrap.iam.api.dto.CreateCustomerRequest;
 import sa.bupa.sadirbootstrap.iam.api.dto.CreateCustomerResponse;
 import sa.bupa.sadirbootstrap.iam.service.SdrIdentityManagementService;
@@ -20,4 +21,10 @@ public class AuthController {
     public CreateCustomerResponse createCustomer(@RequestBody CreateCustomerRequest request) {
         return  svc.createCustomer(request);
     }
+
+    @PostMapping("/customer/authenticate")
+    public String authenticateCustomer(@RequestBody AuthenticationRequest request) {
+        return svc.authenticateAndCreateToken(request);
+    }
+
 }

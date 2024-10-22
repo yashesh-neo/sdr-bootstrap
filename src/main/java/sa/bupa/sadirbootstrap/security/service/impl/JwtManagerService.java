@@ -6,6 +6,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import sa.bupa.sadirbootstrap.iam.domain.SdrAuthority;
@@ -22,8 +23,8 @@ import java.util.stream.Collectors;
 @Service
 @Qualifier("JwtManagerService")
 public class JwtManagerService implements TokenMangerService {
-
-    public static final String SECRET = "U0RSdGtuUFdEMjAyNA==";
+    @Value("${app-data.jwt-key}")
+    public String SECRET;
     private static final String MODULES_KEY = "sdr_modules";
 
     @Override

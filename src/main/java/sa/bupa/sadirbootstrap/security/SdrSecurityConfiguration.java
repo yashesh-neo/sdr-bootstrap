@@ -26,10 +26,12 @@ public class SdrSecurityConfiguration {
                                          AuthenticationProvider appAuthenticationProvider,
                                          SdrJwtAuthFilter authFilter) throws Exception {
 
-        http.authorizeHttpRequests(auth ->
+        http
+                .authorizeHttpRequests(auth ->
                         auth.requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/public/**").permitAll()
                         .anyRequest().authenticated())
+                .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
                 .authenticationManager(authentication -> appAuthenticationProvider.authenticate(authentication))
                 .sessionManagement(sess -> sess
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))

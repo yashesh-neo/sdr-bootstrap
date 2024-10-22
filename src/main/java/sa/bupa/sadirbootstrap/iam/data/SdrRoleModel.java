@@ -14,9 +14,9 @@ public class SdrRoleModel {
     @Id
     @GeneratedValue
     private Long id;
+    private String title;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "role")
     private Set<SdrAuthoritiesModel> authorities;
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = false, mappedBy = "assignedRole")
     private Set<SdrIdentityModel> identities;
-
 }

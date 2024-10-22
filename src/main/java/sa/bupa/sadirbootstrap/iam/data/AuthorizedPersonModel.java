@@ -11,6 +11,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AuthorizedPersonModel extends SdrIdentityModel{
-    @Column(nullable = false)
+    @Column()
     private String authorizedId;
 }
