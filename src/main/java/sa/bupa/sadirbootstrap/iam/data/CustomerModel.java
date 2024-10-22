@@ -21,5 +21,4 @@ public class CustomerModel extends SdrIdentityModel {
     private String crNumber;
     private String contactEmail;
     private String contactMobile;
-
 }

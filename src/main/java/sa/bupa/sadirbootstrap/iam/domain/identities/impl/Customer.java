@@ -15,11 +15,14 @@ public class Customer extends SdrIdentity implements UserDetails {
     private String contactEmail;
     private String contactMobile;
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return getRole().getAuthorities().stream()
-                .map(am -> new SimpleGrantedAuthority(getRole().getAuthorities().stream().findFirst().get().getAccessPattern())).toList();
+        return getRole().getAuthorities()
+                .stream()
+                .map(am -> new SimpleGrantedAuthority(String.valueOf(am.getModuleId())
+                        .concat(SEPARATOR_MODULE_PERMISSION)
+                            .concat(am.getAccessPattern())))
+                .toList();
     }
 
     @Override
