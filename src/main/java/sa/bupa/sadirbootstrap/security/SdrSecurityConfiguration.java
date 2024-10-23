@@ -28,6 +28,7 @@ public class SdrSecurityConfiguration {
         http.authorizeHttpRequests(auth ->
                         auth.requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/public/**").permitAll()
+                                .requestMatchers("/swagger-ui/**","/v3/**").permitAll()
                         .anyRequest().authenticated())
                 .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
                 .authenticationManager(authentication -> appAuthenticationProvider.authenticate(authentication))
