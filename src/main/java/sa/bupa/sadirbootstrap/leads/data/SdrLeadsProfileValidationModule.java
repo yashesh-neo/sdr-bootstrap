@@ -16,8 +16,10 @@ public class SdrLeadsProfileValidationModule {
     @Id
     @GeneratedValue
     private Long id;
-    private Long leadId; // TODO need entity relation with SdrLeadModel
+    private Long leadId; // TODO need entity relation with SdrLeadModel`
+    @Column(length = 15)
     private String leadCrNumber;
+    @Column(length = 15)
     private String leadNationalUnifiedNumber;
     private Integer crValidationStatusBasic;
     private Integer crValidationStatusFull;

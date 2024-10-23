@@ -1,4 +1,4 @@
-package sa.bupa.sadirbootstrap.lu.data;
+package sa.bupa.sadirbootstrap.leads.data;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,7 +11,7 @@ import lombok.Setter;
 @Table(name = "SDR_LU_DOCUMENT_SOURCE")
 @Getter
 @Setter
-public class SdrLuDocumentSourceModel {
+public class SdrDocumentSourceMasterModel {
 
     @Id
     @GeneratedValue

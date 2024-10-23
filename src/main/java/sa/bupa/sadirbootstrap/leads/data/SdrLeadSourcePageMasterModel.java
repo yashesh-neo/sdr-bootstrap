@@ -1,18 +1,19 @@
 package sa.bupa.sadirbootstrap.leads.data;
 
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "SDR_LEAD_STATUS")
+@Table(name = "SDR_LU_LEAD_SOURCE_PAGES")
 @Getter
 @Setter
-public class SdrLeadStatusModel {
+public class SdrLeadSourcePageMasterModel {
 
     @Id
     @GeneratedValue
     private Long id;
-    @Column(length = 50)
-    private String status;
+    @Column(unique = true, length = 30)
+    private String slug;
 }

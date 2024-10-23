@@ -1,4 +1,4 @@
-package sa.bupa.sadirbootstrap.lu.data;
+package sa.bupa.sadirbootstrap.leads.data;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import lombok.Setter;
 @Table(name = "SDR_LU_CHANNEL")
 @Getter
 @Setter
-public class SdrLuChannelModel {
+public class SdrChannelMasterModel {
 
     @Id
     @GeneratedValue

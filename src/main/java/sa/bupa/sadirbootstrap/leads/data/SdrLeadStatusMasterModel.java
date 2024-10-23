@@ -1,9 +1,6 @@
-package sa.bupa.sadirbootstrap.lu.data;
+package sa.bupa.sadirbootstrap.leads.data;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,12 +8,12 @@ import lombok.Setter;
 @Table(name = "SDR_LU_LEAD_STATUS")
 @Getter
 @Setter
-public class SdrLuLeadStatusModel {
+public class SdrLeadStatusMasterModel {
 
     @Id
     @GeneratedValue
     private Long id;
+    @Column(unique = true, length = 30)
     private String leadStatus;
     private Integer seqStatus;
-
 }

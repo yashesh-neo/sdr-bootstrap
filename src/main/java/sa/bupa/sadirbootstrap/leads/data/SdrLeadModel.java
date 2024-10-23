@@ -29,9 +29,9 @@ public class SdrLeadModel {
     private String nationalUnifiedNumberSponsor;
     private String quoteId;
 
-    @Column(unique = true, nullable = false)
-    private String nationalUnifiedNumber; // TODO need entity relation
+    @Column(unique = true, length = 15, nullable = false)
+    private String nationalUnifiedNumber;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, length = 15, nullable = false)
     private String commercialRegistrationNumber;
 }
