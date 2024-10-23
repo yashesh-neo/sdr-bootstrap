@@ -25,9 +25,7 @@ public class SdrSecurityConfiguration {
     public SecurityFilterChain configure(HttpSecurity http,
                                          AuthenticationProvider appAuthenticationProvider,
                                          SdrJwtAuthFilter authFilter) throws Exception {
-
-        http
-                .authorizeHttpRequests(auth ->
+        http.authorizeHttpRequests(auth ->
                         auth.requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/public/**").permitAll()
                         .anyRequest().authenticated())
@@ -36,7 +34,6 @@ public class SdrSecurityConfiguration {
                 .sessionManagement(sess -> sess
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
-
        return http.build();
     }
 

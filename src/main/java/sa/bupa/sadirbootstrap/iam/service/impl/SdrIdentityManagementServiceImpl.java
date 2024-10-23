@@ -10,10 +10,12 @@ import sa.bupa.sadirbootstrap.iam.data.CustomerModel;
 import sa.bupa.sadirbootstrap.iam.data.SdrRoleModel;
 import sa.bupa.sadirbootstrap.iam.data.repository.CustomerModelRepository;
 import sa.bupa.sadirbootstrap.iam.data.repository.SdrRoleModelRepository;
+import sa.bupa.sadirbootstrap.iam.domain.enums.DefaultRole;
 import sa.bupa.sadirbootstrap.iam.mappings.IamMapper;
 import sa.bupa.sadirbootstrap.iam.service.SdrIdentityManagementService;
 import sa.bupa.sadirbootstrap.security.service.TokenMangerService;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,10 +29,10 @@ public class SdrIdentityManagementServiceImpl implements SdrIdentityManagementSe
 
     @Override
     public CreateCustomerResponse createCustomer(CreateCustomerRequest customerDto) {
-            var role= roleModelRepository.findByTitle("ROLE_CUSTOMER");
+            var role= roleModelRepository.findByTitle(DefaultRole.CUSTOMER.toString());
             if(role==null) {
                 role = new SdrRoleModel();
-                role.setTitle("ROLE_CUSTOMER");
+                role.setTitle(DefaultRole.CUSTOMER.toString());
                 role= roleModelRepository.saveAndFlush(role);
             }
             CustomerModel customerModel = new CustomerModel();
