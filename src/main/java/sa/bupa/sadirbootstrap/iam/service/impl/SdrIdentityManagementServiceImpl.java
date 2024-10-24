@@ -11,8 +11,10 @@ import sa.bupa.sadirbootstrap.iam.data.SdrRoleModel;
 import sa.bupa.sadirbootstrap.iam.data.repository.CustomerModelRepository;
 import sa.bupa.sadirbootstrap.iam.data.repository.SdrRoleModelRepository;
 import sa.bupa.sadirbootstrap.iam.domain.enums.DefaultRole;
+import sa.bupa.sadirbootstrap.iam.exceptions.UserNotFoundByPrincipalException;
 import sa.bupa.sadirbootstrap.iam.mappings.IamMapper;
 import sa.bupa.sadirbootstrap.iam.service.SdrIdentityManagementService;
+import sa.bupa.sadirbootstrap.security.service.OTPService;
 import sa.bupa.sadirbootstrap.security.service.TokenMangerService;
 
 import java.util.Optional;
@@ -25,6 +27,7 @@ public class SdrIdentityManagementServiceImpl implements SdrIdentityManagementSe
     private final CustomerModelRepository repository;
     private final TokenMangerService tokenManger;
     private final SdrRoleModelRepository roleModelRepository;
+    private final OTPService otpService;
     IamMapper iamMapper = Mappers.getMapper(IamMapper.class);
 
     @Override
@@ -48,10 +51,16 @@ public class SdrIdentityManagementServiceImpl implements SdrIdentityManagementSe
 
     @Override
     public String authenticateAndCreateToken(AuthenticationRequest request) {
-            var customer= repository.findByPrincipal(request.principal()).get();
-        return tokenManger.createToken(customer.getPrincipal(),customer.getAssignedRole()
-                .getAuthorities().stream()
-                .map(sdrAuthoritiesModel -> iamMapper.authorityModelToAuthority(sdrAuthoritiesModel))
-                .collect(Collectors.toSet()));
+            if(otpService.validateOTP(request.principal(),request.otp())==true) {
+                var customer = repository.findByPrincipal(request.principal()).orElseThrow(() -> {
+                    //TODO: Throw principal not found exception
+                    return new UserNotFoundByPrincipalException("User not found with principal ".concat(request.principal()));
+                });
+                return tokenManger.createToken(customer.getPrincipal(), customer.getAssignedRole()
+                        .getAuthorities().stream()
+                        .map(sdrAuthoritiesModel -> iamMapper.authorityModelToAuthority(sdrAuthoritiesModel))
+                        .collect(Collectors.toSet()));
+            }
+            return null;
     }
 }

@@ -10,10 +10,15 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import sa.bupa.sadirbootstrap.iam.domain.SdrRole;
 import sa.bupa.sadirbootstrap.security.filter.SdrJwtAuthFilter;
 import sa.bupa.sadirbootstrap.security.service.SdrUserCacheService;
 import sa.bupa.sadirbootstrap.security.service.SdrUserDetailService;
+
+import java.util.Arrays;
 import java.util.Set;
 
 
@@ -28,6 +33,7 @@ public class SdrSecurityConfiguration {
         http.authorizeHttpRequests(auth ->
                         auth.requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/public/**").permitAll()
+                                .requestMatchers("/actuator/**").permitAll()
                                 .requestMatchers("/swagger-ui/**","/v3/**").permitAll()
                         .anyRequest().authenticated())
                 .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
@@ -45,6 +51,18 @@ public class SdrSecurityConfiguration {
             provider.setUserDetailsService(service);
             provider.setUserCache(cacheService);
         return provider;
+    }
+
+    //Override Cors config to allow all origins
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("*"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
 }

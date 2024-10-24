@@ -1,6 +1,7 @@
 package sa.bupa.sadirbootstrap.iam.api;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +24,13 @@ public class AuthController {
     }
 
     @PostMapping("/customer/authenticate")
-    public String authenticateCustomer(@RequestBody AuthenticationRequest request) {
-        return svc.authenticateAndCreateToken(request);
+    public ResponseEntity<String> authenticateCustomer(@RequestBody AuthenticationRequest request) {
+        String token;
+        if((token= svc.authenticateAndCreateToken(request))!=null){
+            return ResponseEntity.ok(token);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }
